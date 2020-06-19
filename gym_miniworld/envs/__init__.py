@@ -1,6 +1,7 @@
 import inspect
 import gym
 
+from .hawkmaze import *
 from .remotebot import *
 from .hallway import *
 from .oneroom import *
