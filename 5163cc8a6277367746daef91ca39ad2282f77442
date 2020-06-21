@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a56ace94_5bea0cbe",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1018038
+      },
+      "writtenOn": "2020-06-21T14:50:40Z",
+      "side": 1,
+      "message": "Hier fehlt ein Komma [,]",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "5163cc8a6277367746daef91ca39ad2282f77442",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
