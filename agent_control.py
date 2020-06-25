@@ -25,26 +25,27 @@ import gym_miniworld
 from gym_miniworld.params import *
 
 # importe von DQN_test.py
-from Agent import DQN_Agent  # Hiermit gibt es scheinbar ein Problem
+from DQN_Agent import Agent  # Hiermit gibt es scheinbar ein Problem
 import tensorflow as tf
 
 # --------------------------------------------------Step function definieren:-------------------------------------------
 def step(action):
-    print('step {}/{}: {}'.format(env.step_count + 1, env.max_episode_steps, env.actions(action).name))
+    #print('step {}/{}: {}'.format(env.step_count + 1, env.max_episode_steps, env.actions(action).name))
 
     obs, reward, done, info = env.step(action)
 
-    if reward > 0:
-        print('reward={:.2f}'.format(reward))
+    #if reward > 0:
+        #print('reward={:.2f}'.format(reward))
 
-    if done:
-        print('done!')
-        env.reset(agentgroesse, anzahl_obj)
+    #if done:
+        #print('done!')
+        #env.reset(agentgroesse, anzahl_obj)
 
-    env.render('pyglet', view=view_mode)
+    env.render()
         
 # --------------------------------------------------Deklaration der Main Methode----------------------------------------
 if __name__ == '__main__':
+    env = gym.make('MiniWorld-MazeHAWK-v0')
     tf.compat.v1.disable_eager_execution()
     lr = 0.001
     n_games = 500
@@ -57,8 +58,6 @@ if __name__ == '__main__':
     scores = []
     eps_history = []
 
-    env = gym.make('MiniWorld-MazeHAWK-v0')  # HAWKMaze Gym erstellen
-
 # --------------------------------------------------Initalisierung für Level:-------------------------------------------
     #env.domain_rand = True
     
@@ -68,7 +67,7 @@ if __name__ == '__main__':
     #Größe des Agent anpassen, wenn nicht gesetzt (None) Standardwert 0.6
     agentgroesse = 0.6
     #Anzahl der Kisten. Bei 0 oder None werden zwischen 1 und 15 Kisten erstellt
-    anzahl_obj = 0
+    anzahl_obj = 5
 
     #Schrittweite des Agent
     schritt_agent = 0.50
@@ -79,7 +78,6 @@ if __name__ == '__main__':
     phi_tol = 0
 
 # --------------------------------------------------Leveldurchgang vorbereiten:-----------------------------------------
-    pyglet.app.run()  # Hiermit wird das Fenster zur Darstellung aufgerufen
     for i in range(n_games):
         done = False
         score = 0
@@ -90,9 +88,9 @@ if __name__ == '__main__':
         
 # --------------------------------------------------Level ablauf--------------------------------------------------------
         while not done:
-            env.render('pyglet', view=view_mode)
+            env.render(view=view_mode)
             action = agent.choose_action(observation)
-            observation_, reward, done, info = step(action) #Hier habe ich env.step() zu step() geändert,...
+            observation_, reward, done, info = env.step(0) #Hier habe ich env.step() zu step() geändert,...
             # damit die oben definierte Step function aufgerufen wird
             score += reward
             agent.store_transition(observation, action, reward, observation_, done)
@@ -110,7 +108,6 @@ if __name__ == '__main__':
         env.reset(agentgroesse, anzahl_obj)
         
 # --------------------------------------------------wenn alle Durchläufe beendet----------------------------------------
-    pyglet.app.exit()
     env.close()
 
     # if i % 10 == 0 and i > 0:
