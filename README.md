@@ -50,4 +50,4 @@ Ziel des Spiels ist es alle Kisten im Level aufzuheben.
 
 Eine Anleitung zur Nutzung des KI Lernalgorithmus folgt in Kürze.
 
-Stand: 19.06.2020
+Stand: 25.06.2020
