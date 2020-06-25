@@ -434,13 +434,11 @@ class Ball(MeshEnt):
         )
 
 class Agent(Entity):
-    def __init__(self,agentgroesse = None):
+    def __init__(self):
         super().__init__()
-        print('Größe:')
-        print(agentgroesse)
 
         # Distance between the camera and the floor
-        self.cam_height = 0.5
+        self.cam_height = 1.5
 
         # Camera up/down angles in degrees
         # Positive angles tilt the camera upwards
@@ -450,11 +448,7 @@ class Agent(Entity):
         self.cam_fov_y = 60
 
         # Bounding cylinder size for the agent
-        'Größe des Agent'
-        if agentgroesse == None:
-            self.radius = 0.6
-        else:
-            self.radius = agentgroesse
+        self.radius = 0.4
         self.height = 1.6
 
         # Object currently being carried by the agent
