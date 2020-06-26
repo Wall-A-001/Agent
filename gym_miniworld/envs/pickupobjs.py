@@ -16,7 +16,7 @@ class PickupObjs(MiniWorldEnv):
         self.num_objs = num_objs
 
         super().__init__(
-            max_episode_steps=400,
+            max_episode_steps=600,
             **kwargs
         )
 

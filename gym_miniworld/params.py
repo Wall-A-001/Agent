@@ -6,7 +6,6 @@ from copy import deepcopy
 # Simulation parameter, with domain randomization range
 # The default value is used when domain randomization is disabled
 DomainParam = namedtuple('Domainparam', ['default', 'min', 'max', 'type'])
-
 class DomainParams:
     """
     Set of simulation parameters

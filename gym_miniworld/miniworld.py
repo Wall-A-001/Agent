@@ -10,6 +10,7 @@ from .entity import *
 from .math import *
 from .params import *
 
+import random
 # Default wall height for room
 DEFAULT_WALL_HEIGHT=2.74
 
@@ -521,15 +522,16 @@ class MiniWorldEnv(gym.Env):
         # Initialize the state
         self.seed()
         self.reset()
-        print("reset done")
+
     def close(self):
         pass
 
     def seed(self, seed=None):
+        print(seed)
         self.rand = RandGen(seed)
         return [seed]
 
-    def reset(self):
+    def reset(self,groeße = None,anzahl_objekte = None):
         """
         Reset the simulation at the start of a new episode
         This also randomizes many environment parameters (domain randomization)
@@ -539,7 +541,7 @@ class MiniWorldEnv(gym.Env):
         self.step_count = 0
 
         # Create the agent
-        self.agent = Agent()
+        self.agent = Agent(groeße)
 
         # List of entities contained
         self.entities = []
@@ -552,7 +554,7 @@ class MiniWorldEnv(gym.Env):
         self.wall_segs = []
 
         # Generate the world
-        self._gen_world()
+        self._gen_world(anzahl_objekte)
 
         # Check if domain randomization is enabled or not
         rand = self.rand if self.domain_rand else None
@@ -866,6 +868,7 @@ class MiniWorldEnv(gym.Env):
             self._gen_static_data()
 
         # If an exact position if specified
+        
         if pos is not None:
             ent.dir = dir if dir != None else self.rand.float(-math.pi, math.pi)
             ent.pos = pos
@@ -882,6 +885,9 @@ class MiniWorldEnv(gym.Env):
             hx = r.max_x if max_x == None else max_x
             lz = r.min_z if min_z == None else min_z
             hz = r.max_z if max_z == None else max_z
+            
+            print('lx: %f, hx: %f , lz: %f, hz: %f' %(lx,hx,lz,hz))
+            print('ent.Radius: %f' %(ent.radius))
             pos = self.rand.float(
                 low =[lx + ent.radius, 0, lz + ent.radius],
                 high=[hx - ent.radius, 0, hz - ent.radius]
@@ -919,11 +925,11 @@ class MiniWorldEnv(gym.Env):
         Place the agent in the environment at a random position
         and orientation
         """
-
+        right_angels = [0, math.pi, math.pi/2, -math.pi/2]
         return self.place_entity(
             self.agent,
             room=room,
-            dir=dir,
+            dir=random.choice(right_angels),
             min_x=min_x,
             max_x=max_x,
             min_z=min_z,
@@ -1406,10 +1412,10 @@ class MiniWorldEnv(gym.Env):
         )
 
         # Draw the text label in the window
-        self.text_label.text = "pos: (%.2f, %.2f, %.2f)\nangle: %d\nsteps: %d" % (
+        self.text_label.text = "pos: (%.2f, %.2f, %.2f)\nangle: %d\nsteps: %d\nGesammelte Obj.: %d\nGesamt Obj.: %d" % (
             *self.agent.pos,
             int(self.agent.dir * 180 / math.pi) % 360,
-            self.step_count
+            self.step_count , self.num_picked_up, self.num_objs
         )
         self.text_label.draw()
 
