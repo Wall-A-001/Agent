@@ -32,7 +32,7 @@ class HAWKMaze(MiniWorldEnv):
         self.start_winkel = [0, 0.5*math.pi, math.pi, -0.5*math.pi] # mögl. Start-Winkel des Agents relativ zum Env
 
         # Objekte
-        self.anzahl_objs = 3            # wenn None oder 0: Anzahl zufällig aus (min, max)
+        self.anzahl_objs = 10            # wenn None oder 0: Anzahl zufällig aus (min, max)
         self.anzahl_objs_min = 1        # untere Grenze für Anzahl zufälliger Objekte
         self.anzahl_objs_max = 4        # obere Grenze für Anzahl zufälliger objekte
 
