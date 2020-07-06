@@ -1,111 +1,43 @@
-# MiniWorld (gym-miniworld)
-
-[![Build Status](https://travis-ci.org/maximecb/gym-miniworld.svg?branch=master)](https://travis-ci.org/maximecb/gym-miniworld)
-
-Contents:
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Environments](docs/environments.md)
-- [Design and Customization](docs/design.md)
-- [Troubleshooting](docs/troubleshooting.md)
-
-## Introduction
-
-MiniWorld is a minimalistic 3D interior environment simulator for reinforcement
-learning &amp; robotics research. It can be used to simulate environments with
-rooms, doors, hallways and various objects (eg: office and home environments, mazes).
-MiniWorld can be seen as an alternative to VizDoom or DMLab. It is written
-100% in Python and designed to be easily modified or extended.
-
-<p align="center">
-<img src="images/maze_top_view.jpg" width=260></img>
-<img src="images/sidewalk_0.jpg" width=260></img>
-<img src="images/collecthealth_0.jpg" width=260></img>
-</p>
-
-Features:
-- Few dependencies, less likely to break, easy to install
-- Easy to create your own levels, or modify existing ones
-- Good performance, high frame rate, support for multiple processes
-- Lightweight, small download, low memory requirements
-- Provided under a permissive MIT license
-- Comes with a variety of free 3D models and textures
-- Fully observable [top-down/overhead view](images/maze_top_view.jpg) available
-- [Domain randomization](https://blog.openai.com/generalizing-from-simulation/) support, for sim-to-real transfer
-- Ability to [display alphanumeric strings](images/textframe.jpg) on walls
-- Ability to produce depth maps matching camera images (RGB-D)
-
-Limitations:
-- Graphics are basic, nowhere near photorealism
-- Physics are very basic, not sufficient for robot arms or manipulation
-
-Please use this bibtex if you want to cite this repository in your publications:
-
+# HAWK SOSE2020
+Repository für das Wall-A-001-Projekt
+Dieses Projekt basiert auf dem gym-miniworld Projekt von maximecb : https://github.com/maximecb/gym-miniworld
+Es wurde auf die Bedürfnisse für die Verwendung des Wall-A Projekte im Fach Software Engineering angepasst.
+Um gym-miniworld zu verwenden, ist die OpenAI Gym Umgebung notwendig. Außerdem wird zur Installation Git benötigt.
+Die Installation wird unter Verwendung des Anaconda Navigators beschrieben.
+## Installation OpenAI Gym:
+Im Ordner "site-packages" der Pythonumgebung (Pfad: ...\anaconda3\envs\[Env-Name]\Lib\site-packages) muss das OpenAI Gym eingefügt werden.
+Hierzu müssen in dem entsprechendem Ordner folgende Befehle ausgeführt werden:
 ```
-@misc{gym_miniworld,
-  author = {Chevalier-Boisvert, Maxime},
-  title = {gym-miniworld environment for OpenAI Gym},
-  year = {2018},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/maximecb/gym-miniworld}},
-}
+git clone https://github.com/openai/gym
+cd gym
+pip install -e .
 ```
-
-List of publications & submissions using MiniWorld (please open a pull request to add missing entries):
-- [Temporal Abstraction with Interest Functions](https://arxiv.org/abs/2001.00271) (Mila, Feb 2020, AAAI 2020)
-- [Avoidance Learning Using Observational Reinforcement Learning](https://arxiv.org/abs/1909.11228) (Mila, McGill, Sept 2019)
-- [Visual Hindsight Experience Replay](https://arxiv.org/pdf/1901.11529.pdf) (Georgia Tech, UC Berkeley, Jan 2019)
-
-This simulator was created as part of work done at [Mila](https://mila.quebec/).
-
-## Installation
-
-Requirements:
-- Python 3.5+
-- OpenAI Gym
-- NumPy
-- Pyglet (OpenGL 3D graphics)
-- GPU for 3D graphics acceleration (optional)
-
-You can install all the dependencies with `pip3`:
-
+## Installation des Wall-A Projekts:
+Innerhalb des OpenAI Gym Ordners muss nun in das Verzeichnis envs (Pfad: ...\anaconda3\envs\[Env-Name]\gym\gym\envs) navigiert werden.
+Hier wird nun das Wall-A Projekt Repository erstellt:
+```
+git clone https://github.com/Wall-A-001/Hawk20.git
+cd gym-miniworld
+pip install -e .
+```
+## ALternative Installation
+Falls die direkte Installation des Projektrepositories nicht funktioniert hat, kann alternativ zunächst das originale
+miniworld Environment installiert werden:
 ```
 git clone https://github.com/maximecb/gym-miniworld.git
 cd gym-miniworld
-pip3 install -e .
+pip install -e .
 ```
-
-If you run into any problems, please take a look at the [troubleshooting guide](docs/troubleshooting.md), and if you're still stuck, please
-[open an issue](https://github.com/maximecb/gym-miniworld/issues) on this
-repository to let us know something is wrong.
-
-## Usage
-
-### Testing
-
-There is a simple UI application which allows you to control the simulation or real robot manually. The `manual_control.py` application will launch the Gym environment, display camera images and send actions (keyboard commands) back to the simulator or robot. The `--env-name` argument specifies which environment to load. See the list of [available environments](docs/environments.md) for more information.
-
+Anschließend müssen die Dateien mit denen aus dem Wall-A Projekt überschrieben werden.
+## Funktionsprüfung    
+Nun sollte das Wall-A Projekt installiert und funktionsfähig sein.
+Um die Installation zu prüfen, kann im Ordner Env\Hawk20 das Programm
 ```
-./manual_control.py --env-name MiniWorld-Hallway-v0
-
-# Display an overhead view of the environment
-./manual_control.py --env-name MiniWorld-Hallway-v0 --top_view
+python manual_control.py
 ```
-
-There is also a script to run automated tests (`run_tests.py`) and a script to gather performance metrics (`benchmark.py`).
-
-### Reinforcement Learning
-
-To train a reinforcement learning agent, you can use the code provided in the [/pytorch-a2c-ppo-acktr](/pytorch-a2c-ppo-acktr) directory. This code is a modified version of the RL code found in [this repository](https://github.com/ikostrikov/pytorch-a2c-ppo-acktr). I recommend using the PPO algorithm and 16 processes or more. A sample command to launch training is:
-
-```
-python3 main.py --algo ppo --num-frames 5000000 --num-processes 16 --num-steps 80 --lr 0.00005 --env-name MiniWorld-Hallway-v0
-```
-
-Then, to visualize the results of training, you can run the following command. Note that you can do this while the training process is still running. Also note that if you are running this through SSH, you will need to enable X forwarding to get a display:
-
-```
-python3 enjoy.py --env-name MiniWorld-Hallway-v0 --load-dir trained_models/ppo
-```
+ausgeführt werden. Hier sollte sich eine Fenster öffnen, in welchem ein Labyrinth aus der Vogelperspektive zu sehen ist.
+Die Spielfigur (rotes Dreieck) kann mit Hilfe der Pfeiltasten zu den roten Quadraten navigiert werden.
+Steht die Spielfigur vor einem Quadrat kann dieses mit der "p" Taste aufgehoben werden.
+Ziel des Spiels ist es, alle Kisten im Level aufzuheben.
+Eine Anleitung zur Nutzung des KI Lernalgorithmus folgt in Kürze.
+Stand: 05.07.2020
