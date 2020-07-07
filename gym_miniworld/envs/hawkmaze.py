@@ -18,8 +18,8 @@ class HAWKMaze(MiniWorldEnv):
         domain_rand = False
 
         # Maze
-        self.num_rows = 3               # Zeilen des HAWK-Mazes
-        self.num_cols = 3               # Spalten des HAWK-Mazes
+        self.num_rows = 2               # Zeilen des HAWK-Mazes
+        self.num_cols = 2               # Spalten des HAWK-Mazes
         self.room_size = 5              # Raumgröße
         self.gap_size = 0.25            # Wanddicke/Abstand zwischen 2 Räumen
 
@@ -27,12 +27,12 @@ class HAWKMaze(MiniWorldEnv):
         self.agent_groesse = 0.6        # Radius Agent (für Kollisionsmodell/Aufheben-Aktion)
         self.schritt_agent = 0.50       # Schrittweite
         self.schritt_toleranz = 0.02    # Schrittweite-Toleranz, wenn Domain-Rand. aktiviert
-        self.phi_agent = 45             # Drehwinkel
+        self.phi_agent = 90             # Drehwinkel
         self.phi_tol = 0.0              # Drehwinkel-Toleranz, wenn Domain-Rand. aktiviert
         self.start_winkel = [0, 0.5*math.pi, math.pi, -0.5*math.pi] # mögl. Start-Winkel des Agents relativ zum Env
 
         # Objekte
-        self.anzahl_objs = 10            # wenn None oder 0: Anzahl zufällig aus (min, max)
+        self.anzahl_objs = 0           # wenn None: Anzahl zufällig aus (min, max)
         self.anzahl_objs_min = 1        # untere Grenze für Anzahl zufälliger Objekte
         self.anzahl_objs_max = 4        # obere Grenze für Anzahl zufälliger objekte
 
@@ -54,7 +54,6 @@ class HAWKMaze(MiniWorldEnv):
         # turn_left = 0 | turn_right = 1 | move_forward = 2 | move_back = 3 | pickup = 4
         self.action_space = spaces.Discrete(self.actions.pickup+1)
 
-    "------Erstellung des Raumes in MiniWorld------"
 
     def _reward(self):
         #Ziel ist es, den Agent mit möglichst wenigen Aktionen alle verfügbaren...
@@ -66,6 +65,7 @@ class HAWKMaze(MiniWorldEnv):
 
         # Konstante Belohnung für jedes eingesammelte Objekt. Abzug für Anzahl benötigter Aktionen
         return 1.0 - 0.2 * (self.step_count / self.max_episode_steps)
+
 
     def step(self, action):
         obs, reward, done, info = super().step(action)
@@ -82,6 +82,7 @@ class HAWKMaze(MiniWorldEnv):
                 done = True             # Episode beenden nach dem letzten Objekt
 
         return obs, reward, done, info
+
 
     def reset(self):
         """
@@ -146,6 +147,8 @@ class HAWKMaze(MiniWorldEnv):
         # Return first observation
         return obs
 
+
+    "------Erstellung des Raumes in MiniWorld------"
     def _gen_world(self):
         rows = []
         # For each row
@@ -221,7 +224,7 @@ class HAWKMaze(MiniWorldEnv):
 
         'Erstellen und plazieren der Objekte (Box)'
         'Boxen werden horizontal ausgerichtet'
-        if self.anzahl_objs == None or self.anzahl_objs == 0:
+        if self.anzahl_objs == None:
             self.anzahl_objs = random.randint(self.anzahl_objs_min, self.anzahl_objs_max)
 
         for obj in range(self.anzahl_objs):
