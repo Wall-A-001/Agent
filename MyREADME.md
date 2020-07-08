@@ -1,5 +1,5 @@
 # HAWK SOSE2020 
-Repository für das Wall-A-001-Projekt
+Repository für das Wall-A-001-Projekt.
 
 Dieses Projekt basiert auf dem gym-miniworld Project von maximecb : https://github.com/maximecb/gym-miniworld
 Es wurde auf die Bedürfnisse für die Verwendung des Wall-A Projekte im Fach Software Engineering angepasst.

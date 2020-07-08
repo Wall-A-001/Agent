@@ -20,7 +20,7 @@ git clone https://github.com/Wall-A-001/Hawk20.git
 cd gym-miniworld
 pip install -e .
 ```
-## ALternative Installation
+## Alternative Installation
 Falls die direkte Installation des Projektrepositories nicht funktioniert hat, kann alternativ zunächst das originale
 miniworld Environment installiert werden:
 ```
@@ -40,4 +40,4 @@ Die Spielfigur (rotes Dreieck) kann mit Hilfe der Pfeiltasten zu den roten Quadr
 Steht die Spielfigur vor einem Quadrat kann dieses mit der "p" Taste aufgehoben werden.
 Ziel des Spiels ist es, alle Kisten im Level aufzuheben.
 Eine Anleitung zur Nutzung des KI Lernalgorithmus folgt in Kürze.
-Stand: 05.07.2020
+Stand: 07.07.2020, 08:42
