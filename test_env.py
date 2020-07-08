@@ -1,3 +1,6 @@
+#   Unittest für das Environment
+#   08.07.2020
+
 import unittest
 import random
 import gym
