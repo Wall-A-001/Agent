@@ -521,7 +521,7 @@ class MiniWorldEnv(gym.Env):
         # Initialize the state
         self.seed()
         self.reset()
-        print("reset done")
+        #print("reset done")
     def close(self):
         pass
 
@@ -1406,10 +1406,12 @@ class MiniWorldEnv(gym.Env):
         )
 
         # Draw the text label in the window
-        self.text_label.text = "pos: (%.2f, %.2f, %.2f)\nangle: %d\nsteps: %d" % (
+        self.text_label.text = "pos: (%.2f, %.2f, %.2f)\nangle: %d\nsteps: %d \ngenerierte Kisten: %d \ngefundene Kisten: %d" % (
             *self.agent.pos,
             int(self.agent.dir * 180 / math.pi) % 360,
-            self.step_count
+            self.step_count,
+            self.anzahl_objs,
+            self.num_picked_up
         )
         self.text_label.draw()
 

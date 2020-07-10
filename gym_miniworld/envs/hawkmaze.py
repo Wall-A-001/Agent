@@ -32,7 +32,7 @@ class HAWKMaze(MiniWorldEnv):
         self.start_winkel = [0, 0.5*math.pi, math.pi, -0.5*math.pi] # mögl. Start-Winkel des Agents relativ zum Env
 
         # Objekte
-        self.anzahl_objs = 0           # wenn None: Anzahl zufällig aus (min, max)
+        self.anzahl_objs = 5            # wenn None: Anzahl zufällig aus (min, max)
         self.anzahl_objs_min = 1        # untere Grenze für Anzahl zufälliger Objekte
         self.anzahl_objs_max = 4        # obere Grenze für Anzahl zufälliger objekte
 
@@ -64,18 +64,21 @@ class HAWKMaze(MiniWorldEnv):
         #return 1.0 * self.num_picked_up - 0.2 * (self.step_count / self.max_episode_steps)
 
         # Konstante Belohnung für jedes eingesammelte Objekt. Abzug für Anzahl benötigter Aktionen
-        return 1.0 - 0.2 * (self.step_count / self.max_episode_steps)
+        if self.agent.carrying:
+            return 1.0
+        else:
+            return - 0.9 * (1 / self.max_episode_steps)   #für jeden Schritt ohne Kiste wird ein der Reward etwas verringert
 
 
     def step(self, action):
         obs, reward, done, info = super().step(action)
+        reward = self._reward()  # Reward berechnen
 
         "Box einsammeln mit pick_up Aktion"
         if self.agent.carrying:
             self.entities.remove(self.agent.carrying)
             self.agent.carrying = None
             self.num_picked_up += 1
-            reward = self._reward()     # Reward berechnen
             self.step_count = 0         # Timer nach erfolgreichem Aufsammeln zurücksetzen
 
             if self.num_picked_up == self.anzahl_objs:
