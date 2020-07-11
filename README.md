@@ -5,7 +5,7 @@ Es wurde auf die Bedürfnisse für die Verwendung des Wall-A Projekts im Fach So
 Um gym-miniworld zu verwenden, ist die OpenAI Gym Umgebung notwendig. Außerdem wird zur Installation Git benötigt.
 Die Installation wird unter Verwendung des Anaconda Navigators beschrieben.
 
-##Voraussetzungen für Installation
+## Voraussetzungen für Installation
 Die verwendete Software besitzt eine Reihe von Abhängigkeiten gegenüber anderen Python-Modulen und Paketen. Diese werden durch die weiter unten beschriebene Installationsanleitung automatisch hinzugefügt. Sollten Probleme diesbezüglich auftauchen, sind hier nochmal alle relevanten Abhängigkeiten aufgelistet:
 - Python: >=3.5
 - OpenAI Gym: >=0.9.0
