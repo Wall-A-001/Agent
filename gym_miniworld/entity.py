@@ -378,6 +378,9 @@ class Box(Entity):
         self.radius = math.sqrt(sx*sx + sz*sz)/2
         self.height = sy
 
+        #Versuch den color_vec ohne ramdomize Methode einzufügen, dies ist notwendig für den Unittest
+        self.color_vec = COLORS[self.color]
+
     def randomize(self, params, rng):
         self.color_vec = COLORS[self.color] + params.sample(rng, 'obj_color_bias')
         self.color_vec = np.clip(self.color_vec, 0, 1)
