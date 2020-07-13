@@ -1,6 +1,9 @@
-#   Unittest für das Environment
-#   erstellt vom Environment Team
-#   09.07.2020
+"""
+Unittest für das Environment
+Softwareentwicklung SoSe 2020 Enviroment
+erstellt vom Environment Team
+12.07.2020
+"""
 
 import unittest
 import time
@@ -34,7 +37,7 @@ class simpleTest(unittest.TestCase):
        if name == "Parameter_Test":                                         # wird die setUp Methode mit "Place_Agent_on_defined_Position" aufgerufen,
            self.env = gym.make('MiniWorld-HAWKMaze-v0')                     # Anfangs wird das hawkmaze Environment erstellt
            self.env.num_rows = 10                                           # Die Anzahl der Zeilen beträgt 50
-           self.env.num_cols = 10                                          # Die Anzahl der Spalten beträgt 100
+           self.env.num_cols = 10                                           # Die Anzahl der Spalten beträgt 100
            self.env.anzahl_objs = 10                                        # Es werden 10 Objekte platziert
 
        if name == "Place_Agent_on_defined_Position":                        # wird die setUp Methode mit "Place_Agent_on_defined_Position" aufgerufen,
