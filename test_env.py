@@ -2,7 +2,6 @@
 #   erstellt vom Environment Team
 #   09.07.2020
 
-from time import sleep
 import unittest
 import time
 #import timeout_decorator - muss erst als Modul installiert werden (siehe UnitTest PDF Seite 33)
@@ -32,6 +31,12 @@ class simpleTest(unittest.TestCase):
            self.env.anzahl_objs = 10                                        # wird die Anzahl der Boxen auf 10 gesetzt
            self.env.reset()                                                 # anschließend wird das Environment neugestartet (zur Initialisierung)
 
+       if name == "Parameter_Test":                                         # wird die setUp Methode mit "Place_Agent_on_defined_Position" aufgerufen,
+           self.env = gym.make('MiniWorld-HAWKMaze-v0')                     # Anfangs wird das hawkmaze Environment erstellt
+           self.env.num_rows = 10                                           # Die Anzahl der Zeilen beträgt 50
+           self.env.num_cols = 10                                          # Die Anzahl der Spalten beträgt 100
+           self.env.anzahl_objs = 10                                        # Es werden 10 Objekte platziert
+
        if name == "Place_Agent_on_defined_Position":                        # wird die setUp Methode mit "Place_Agent_on_defined_Position" aufgerufen,
            self.env = gym.make('MiniWorld-HAWKMaze-v0')                     # zuerst wird das HawkMaze Environment erstellt
            self.env.room_size = 5                                           # Der Raum wird auf eine Größe von 100x100 gesetzt, damit es nicht zu Kollisionen kommt
@@ -55,36 +60,63 @@ class simpleTest(unittest.TestCase):
 
 #---------------------------------------------------Test Durchläufe-----------------------------------------------------
 
-    # 1.Test: Prüfen ob die Parameter aus hawkmaze.py realisiert werden können (ohne den Timeout_Decorator ist dieser Test witzlos)
-    #@timeout_decorator.timeout(1)
-    def testParams(self):
-        self.env = gym.make('MiniWorld-HAWKMaze-v0')  # zuerst wird das HawkMaze Environment erstellt
-        self.env.reset()
+    # 1.Test: Prüfen ob die Parameter aus hawkmaze.py realisiert werden können
+    # Es wird 100 mal versucht ein neues Environment zu erzeugen
+    #@timeout_decorator.timeout(1)                                          #Timeout_Decorator gibt Bewertet den Test als nicht bestanden wenn die Ausführung länger als 1 min dauert
+    def testGeneration(self):
+        self.env = gym.make('MiniWorld-HAWKMaze-v0')                        # das HawkMaze Environment wird erstellt
+        for a in range(100):
+            self.env.reset()                                                # es wird 100 mal ein neues Environmnet mit den Parameter aus der hawkmaze.py erzeugt
 
-    # 1.Test: Prüfung ob der Agent nur 45° Winkel einnimmt
+    # 2.Test: Kollisions Test (übernommen aus run_test.py Quelle: https://github.com/maximecb/gym-miniworld/blob/master/run_tests.py)
+    def testKollision(self):
+        self.env = gym.make('MiniWorld-HAWKMaze-v0')                        # das HawkMaze Environment wird erstellt
+        for b in range(10):
+            self.env.reset()                                                # es wird 10 mal ein neues Environment erzeugt
+            for c in range(50):
+                self.env.step(self.env.actions.move_forward)                # der Agent macht in jedem Environment 50 Schritte vorwärts
+                x, y, z = self.env.agent.pos                                # die Position des Agents wird abgefragt
+
+                assert x >= self.env.min_x and x <= self.env.max_x          # es wird verglichen, ob die Position des Agents innerhalb des Environmnets liegt
+                self.assertEqual(y, 0)
+                assert z >= self.env.min_z and z <= self.env.max_z
+
+    # 3. Test: Parameter des Environments testen
+    def testParams(self):
+        """Parameter_Test"""
+
+        for d in range(50):
+            self.env.reset()                                                # es werden 50 zufällige Level generiert
+            #self.env.render(view='top')
+            #time.sleep(1)
+            self.assertEqual(self.env.num_rows, 10)                         # in jedem Level wird getestet, ob die Anzahl der Zeilen, Spalten und Objekte der Vorgabe entspricht
+            self.assertEqual(self.env.num_cols, 10)
+            self.assertEqual(self.env.anzahl_objs, 10)
+
+    # 4.Test: Prüfung ob der Agent nur 90° Winkel einnimmt
     def testWinkel(self):
-        """Empty"""
+        """Empty"""                                                         # für diesen Test werden die Parameter aus der Setup Up
         theta = 0                                                           # die Variable "theta" wird mit 0 initalisiert
-        for i in range (100):                                               # es werden 10 Durchläufe ausgeführt
+        for e in range (100):                                               # es werden 10 Durchläufe ausgeführt
             obs, reward, done, info = self.env.step(random.randint(0,4))    # ein zufälliger Schritt wird ausgeführt
             theta = round(self.env.agent.dir *180 /math.pi *10000) /10000   # der Winkel des Agents nach dem Schritt (in Grad) wird in die Variable "theta" geschrieben (gerundet auf Hunderttausendstel)
             mod = theta % self.env.phi_agent                                # mit dem Modulo Operator wird geprüft ob der Winkel restlos durch 45° teilbar ist.
 
         self.assertEqual(mod, 0)                                            # ist das Ergebnis der Modulo Operation 0, wurde der Test bestanden.
 
-    # 2.Test: Prüfen, ob der Schrittzaehler korrekt funktioniert
+    # 5.Test: Prüfen, ob der Schrittzaehler korrekt funktioniert
     def testSchrittZaehler(self):
         """Empty"""
-        for j in range (100):                                               # es werden 100 Druchläufe ausgeführt
+        for f in range (100):                                               # es werden 100 Druchläufe ausgeführt
             obs, reward, done, info = self.env.step(random.randint(0, 4))   # ein zufälliger Schritt wird ausgeführt
 
         self.assertEqual(self.env.step_count, 100)                          # ist der Schrittzäehler nach 100 zufälligen Schritten gleich 100, wurde der Test bestanden
 
-    # 3.Test: Prüfen ob der Reward korrekt berechnet wird
+    # 6.Test: Prüfen ob der Reward korrekt berechnet wird
     def testReward(self):
         """Place_Agent_on_defined_Position"""
         reward_sum = 0
-        for k in range (9):                                                # es werden 10 Druchläufe ausgeführt
+        for g in range (9):                                                # es werden 10 Druchläufe ausgeführt
             obs, reward, done, info = self.env.step(self.env.actions.move_forward)   # der Agent führt einen Schritt geradeaus durch
             reward_sum += reward
             #self.env.render(view='top')
