@@ -17,7 +17,7 @@ Die verwendete Software besitzt eine Reihe von Abhängigkeiten gegenüber andere
 
 ## Installation OpenAI Gym:
 Im Ordner "site-packages" der Pythonumgebung (Pfad: ...\anaconda3\envs\[Env-Name]\Lib\site-packages) muss das OpenAI Gym eingefügt werden.
-Hierzu müssen in dem entsprechendem Ordner folgende Befehle ausgeführt werden:
+Hierzu müssen in dem entsprechendem Ordner folgende Befehle ausgeführt werden: (Der Punkt von "pip install -e ." ist Teil des Befehls)
 ```
 git clone https://github.com/openai/gym
 cd gym
