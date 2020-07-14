@@ -54,5 +54,30 @@ Die Spielfigur (rotes Dreieck) kann mit Hilfe der Pfeiltasten zu den roten Quadr
 Steht die Spielfigur vor einem Quadrat kann dieses mit der "p" Taste aufgehoben werden.
 Ziel des Spiels ist es, alle Kisten im Level aufzuheben.
 
-Eine Anleitung zur Nutzung des KI Lernalgorithmus folgt in Kürze.
-Stand: 11.07.2020, 10:30
+## Installation von Tensorflow
+Bei TensorFlow handelt es sich um eine plattformunabhängige Programmbibliothek unter Open-Source-Lizenz, die sich für Aufgaben rund um maschinelles Lernen und Künstliche Intelligenz (KI) einsetzen lässt.
+```
+conda install -c conda-forge tensorflow
+```
+Diese Installation erfordert die Nutzung einer Anaconda Umgebung. Als Alternative bietet sich die Installation mit pip und einer spezifischen Version von TensorFlow für Ihre Plattform an:
+```
+pip install tensorflow==1.6
+```
+## Installation von Numpy Bibliothek 
+NumPy ist eine Programmbibliothek für die Programmiersprache Python, die eine einfache Handhabung von Vektoren,
+Matrizen oder generell großen mehrdimensionalen Arrays ermöglicht. Neben den Datenstrukturen bietet NumPy
+auch effizient implementierte Funktionen für numerische Berechnungen an.
+```
+pip install numpy
+```
+## Installation von Keras 
+Keras  ist eine Open Source Deep-Learning-Bibliothek, geschrieben in Python und  bietet eine einheitliche Schnittstelle für verschiedene Backends, darunter TensorFlow, Microsoft Cognitive Toolkit (vormals CNTK) und Theano. Das Ziel von Keras ist es, die Anwendung dieser Bibliotheken so einsteiger- und nutzerfreundlich wie möglich zu machen.
+```
+conda install -c conda-forge keras
+``` 
+
+## Main Funktion starten 
+Um das Programm starten zu können, muss sich der Benutzer zunächst vergewissern, dass alle genannten Bibliotheken installiert und funktionsfähig sind. Dann muss der Benutzer mit dem Terminal zum Ordner "Hawk20-master" navigieren. Von diesem Ordner  kann das Programm mit folgendem Befehl gestartet werden:
+```
+python Main.py
+``` 
