@@ -17,7 +17,7 @@ Die verwendete Software besitzt eine Reihe von Abhängigkeiten gegenüber andere
 
 ## Installation OpenAI Gym:
 Im Ordner "site-packages" der Pythonumgebung (Pfad: ...\anaconda3\envs\[Env-Name]\Lib\site-packages) muss das OpenAI Gym eingefügt werden.
-Hierzu müssen in dem entsprechendem Ordner folgende Befehle ausgeführt werden: (Der Punkt von "pip install -e ." ist Teil des Befehls)
+Hierzu müssen in dem entsprechendem Ordner folgende Befehle ausgeführt werden:
 ```
 git clone https://github.com/openai/gym
 cd gym
@@ -74,6 +74,10 @@ pip install numpy
 Keras  ist eine Open Source Deep-Learning-Bibliothek, geschrieben in Python und  bietet eine einheitliche Schnittstelle für verschiedene Backends, darunter TensorFlow, Microsoft Cognitive Toolkit (vormals CNTK) und Theano. Das Ziel von Keras ist es, die Anwendung dieser Bibliotheken so einsteiger- und nutzerfreundlich wie möglich zu machen.
 ```
 conda install -c conda-forge keras
+``` 
+Diese Installation erfordert die Nutzung einer Anaconda Umgebung. Als Alternative bietet sich die Installation mit pip  an:
+```
+pip install keras
 ``` 
 
 ## Main Funktion starten 
