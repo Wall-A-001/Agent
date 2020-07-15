@@ -59,7 +59,7 @@ Die Spielfigur (rotes Dreieck) kann mit Hilfe der Pfeiltasten zu den roten Quadr
 Steht die Spielfigur vor einem Quadrat kann dieses mit der "p" Taste aufgehoben werden.
 Ziel des Spiels ist es, alle Kisten im Level aufzuheben.
 
-#Setup des Agents
+# Setup des Agents
 ## Installation von Tensorflow
 Bei TensorFlow handelt es sich um eine plattformunabhängige Programmbibliothek unter Open-Source-Lizenz, die sich für Aufgaben rund um maschinelles Lernen und Künstliche Intelligenz (KI) einsetzen lässt.
 ```
