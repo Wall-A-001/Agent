@@ -51,6 +51,8 @@ if __name__ == '__main__':
     state_size = (30, 40, 1)
     action_size = env.action_space.n
     agent = DDQN_Agent(state_size, action_size)
+
+    # Loads a saved model
     #agent.load('dqn_model.h5')
 
     episodes = 5000
@@ -111,8 +113,8 @@ if __name__ == '__main__':
 
                 break
 
-            #if len(agent.memory) > batch_size:
-            #     agent.replay(batch_size)
+        if len(agent.memory) < batch_size:
+                agent.replay(batch_size)
 
         if e % 10 == 0 and e > 0:
           agent.save('dqn_model.h5')
