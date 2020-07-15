@@ -14,7 +14,7 @@ Die verwendete Software besitzt eine Reihe von Abhängigkeiten gegenüber andere
 - cloudpickle: >=1.2.0, <1.4.0
 - scipy
 - enum34: ~=1.1.6
-
+# Installation des Environments
 ## Installation OpenAI Gym:
 Im Ordner "site-packages" der Pythonumgebung (Pfad: ...\anaconda3\envs\[Env-Name]\Lib\site-packages) muss das OpenAI Gym eingefügt werden.
 Hierzu müssen in dem entsprechendem Ordner folgende Befehle ausgeführt werden: (Der Punkt von "pip install -e ." ist Teil des Befehls)
@@ -29,11 +29,11 @@ Innerhalb des OpenAI Gym Ordners muss nun in das Verzeichnis envs (Pfad: ...\ana
 Hier wird nun das Wall-A Projekt Repository erstellt:
 ```
 git clone https://github.com/Wall-A-001/Hawk20.git
-cd gym-miniworld
+cd Hawk20
 pip install -e .
 ```
 
-## Alternative Installation
+#### (Alternative Installation)
 Falls die direkte Installation des Projektrepositories nicht funktioniert hat, kann alternativ zunächst das originale
 miniworld Environment installiert werden:
 ```
@@ -41,7 +41,12 @@ git clone https://github.com/maximecb/gym-miniworld.git
 cd gym-miniworld
 pip install -e .
 ```
-Anschließend müssen die Dateien mit denen aus dem Wall-A Projekt überschrieben werden.
+Hierdurch werden die benötigten Verknüpfungen erstellt.
+
+Der Code des Wall-A-001 Projektes muss zusätzlich als ZIP Datei von GitHub runtergeladen
+und entpackt werden.
+Anschließend müssen die ursprünglichen Dateien aus dem Miniworld Environment manuell 
+durch die Dateien aus dem Wall-A Projekt überschrieben werden.
 
 ## Funktionsprüfung    
 Nun sollte das Wall-A Projekt installiert und funktionsfähig sein.
@@ -54,5 +59,34 @@ Die Spielfigur (rotes Dreieck) kann mit Hilfe der Pfeiltasten zu den roten Quadr
 Steht die Spielfigur vor einem Quadrat kann dieses mit der "p" Taste aufgehoben werden.
 Ziel des Spiels ist es, alle Kisten im Level aufzuheben.
 
-Eine Anleitung zur Nutzung des KI Lernalgorithmus folgt in Kürze.
-Stand: 11.07.2020, 10:30
+#Setup des Agents
+## Installation von Tensorflow
+Bei TensorFlow handelt es sich um eine plattformunabhängige Programmbibliothek unter Open-Source-Lizenz, die sich für Aufgaben rund um maschinelles Lernen und Künstliche Intelligenz (KI) einsetzen lässt.
+```
+conda install -c conda-forge tensorflow
+```
+Diese Installation erfordert die Nutzung einer Anaconda Umgebung. Als Alternative bietet sich die Installation mit pip und einer spezifischen Version von TensorFlow für Ihre Plattform an:
+```
+pip install tensorflow==1.6
+```
+## Installation von Numpy Bibliothek
+NumPy ist eine Programmbibliothek für die Programmiersprache Python, die eine einfache Handhabung von Vektoren, Matrizen oder generell großen mehrdimensionalen Arrays ermöglicht. Neben den Datenstrukturen bietet NumPy auch effizient implementierte Funktionen für numerische Berechnungen an.
+```
+pip install numpy
+```
+## Installation von Keras
+Keras ist eine Open Source Deep-Learning-Bibliothek, geschrieben in Python und bietet eine einheitliche Schnittstelle für verschiedene Backends, darunter TensorFlow, Microsoft Cognitive Toolkit (vormals CNTK) und Theano. Das Ziel von Keras ist es, die Anwendung dieser Bibliotheken so einsteiger- und nutzerfreundlich wie möglich zu machen.
+```
+conda install -c conda-forge keras
+```
+Diese Installation erfordert die Nutzung einer Anaconda Umgebung. Als Alternative bietet sich die Installation mit pip an:
+```
+pip install keras
+```
+## Main Funktion starten
+Um das Programm starten zu können, muss sich der Benutzer zunächst vergewissern, dass alle genannten Bibliotheken installiert und funktionsfähig sind. Dann muss der Benutzer mit dem Terminal zum Ordner "Hawk20-master" navigieren. Von diesem Ordner kann das Programm mit folgendem Befehl gestartet werden:
+```
+python Main.py
+```
+
+Stand 15.07.2020
